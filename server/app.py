@@ -2,6 +2,7 @@ from flask import Flask, jsonify, request
 import numpy as np
 import pandas as pd
 from keybert import KeyBERT
+import json
 
 
 model = KeyBERT(model="distilbert-base-nli-mean-tokens")
@@ -87,6 +88,25 @@ def avg_rating(appid):
     x = df3['voted_up'].value_counts().tolist()
     rate = (x[0] * 5 + (x[1])) / (x[0]+x[1])
     return jsonify({'Average Rating': rate})
+
+
+@app.route('/top_games')
+def top_games():
+    y = df.appid.unique()
+    z = []
+    for ele in y:
+        df3 = df[(df['appid'] == ele)]
+
+        x = df3['voted_up'].value_counts().tolist()
+
+        if len(x) == 2:
+            z.append((x[0] * 5 + (x[1])) / (x[0]+x[1]))
+    top = list(map(lambda x, y: (x, y), y, z))
+    top_sorted = sorted(top, key=lambda x: x[1])
+
+    print(top_sorted)
+    # my_array = np.asarray(top_sorted)
+    return {'Top games': "heelo"}
 
 
 # driver function
