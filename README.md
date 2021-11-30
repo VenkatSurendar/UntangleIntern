@@ -23,12 +23,6 @@ The entire architecture is well designed and deployed successfully in AWS cloud 
 - (Backend)	Main Flask app: http://52.66.244.63:8000/avg_rating/597970 
 - StreamLit : http://3.110.165.21:8501/
 
-## Features
-
-- Light/dark mode toggle
-- Live previews
-- Fullscreen mode
-- Cross platform
 
 
 ## Tech Stack
