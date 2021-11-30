@@ -2,13 +2,14 @@ from flask import Flask, jsonify, request
 import numpy as np
 import pandas as pd
 from keybert import KeyBERT
+from flask_cors import CORS
 import json
 
 
 model = KeyBERT(model="distilbert-base-nli-mean-tokens")
 
 app = Flask(__name__)
-
+CORS(app)
 
 df = pd.concat(
     map(pd.read_csv, ['reviews-13495-13500.csv', 'reviews-13500-13537.csv']), ignore_index=True)

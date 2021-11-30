@@ -9,6 +9,8 @@ flask-restful = "*"
 numpy = "*"
 pandas = "*"
 keybert = "*"
+zappa = "*"
+flask-cors = "*"
 
 [dev-packages]
 
