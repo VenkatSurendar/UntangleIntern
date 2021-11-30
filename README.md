@@ -21,7 +21,7 @@ The entire architecture is well designed and deployed successfully in AWS cloud 
  
 - (Backend) Yeak model: http://3.110.113.63:5000/trending_keywords/597970
 - (Backend)	Main Flask app: http://52.66.244.63:8000/avg_rating/597970 
-
+- StreamLit : http://3.110.165.21:8501/
 
 ## Features
 
