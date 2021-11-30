@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from keybert import KeyBERT
 from flask_cors import CORS
+import itertools
 import json
 
 
@@ -49,10 +50,19 @@ def rev_sentiments(appid):
     print(y)
     return jsonify({'sentiment': y})
 
+# Average Playtime
+
+
+@app.route('/avg_playtime/<int:appid>')
+def avg_play(appid):
+
+    df3 = df[(df['appid'] == appid)]
+    y = df3['playtime_forever'].mean()
+
+    return jsonify({'avg_playtime': y})
+
 
 # recent reviews
-
-
 @app.route('/recent_reviews/<int:appid>')
 def recent_reviews(appid):
 
@@ -77,7 +87,7 @@ def trending_keywords(appid):
         arr = arr + a
     x = arr.sort(key=lambda x: x[1])
     print(x)
-    return jsonify({'Trending keywords': arr})
+    return jsonify({'Trending_keywords': arr})
 
 # Average rating of game
 
@@ -88,12 +98,16 @@ def avg_rating(appid):
     df3 = df[(df['appid'] == appid)]
     x = df3['voted_up'].value_counts().tolist()
     rate = (x[0] * 5 + (x[1])) / (x[0]+x[1])
-    return jsonify({'Average Rating': rate})
+    return jsonify({'Average_Rating': rate})
+
+# top_games
 
 
 @app.route('/top_games')
 def top_games():
     y = df.appid.unique()
+    y = y.tolist()
+    print(type(y))
     z = []
     for ele in y:
         df3 = df[(df['appid'] == ele)]
@@ -102,12 +116,13 @@ def top_games():
 
         if len(x) == 2:
             z.append((x[0] * 5 + (x[1])) / (x[0]+x[1]))
-    top = list(map(lambda x, y: (x, y), y, z))
-    top_sorted = sorted(top, key=lambda x: x[1])
 
-    print(top_sorted)
-    # my_array = np.asarray(top_sorted)
-    return {'Top games': "heelo"}
+    res = []
+    for (a, b) in zip(y, z):
+        p = [a, b]
+        res.append(p)
+    print(res)
+    return jsonify({"Top": res})
 
 
 # driver function
