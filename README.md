@@ -61,7 +61,7 @@ The entire architecture is well designed and deployed successfully in AWS cloud 
 
 - For Streamlit:
 1. Clone and direct to the folder
-2. Run “streamline app.py”
+2. Run “streamlit run app.py”
 3. Make sure the excel/csv files required are there within the folder.
 ## Feedback
 
